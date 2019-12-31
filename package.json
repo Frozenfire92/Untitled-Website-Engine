@@ -1,0 +1,17 @@
+{
+  "name": "untitled-website-engine",
+  "version": "0.1.0",
+  "description": "",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "tsc && node build/index.js",
+    "start": "npm run build && cd dist && python3 -m http.server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joel Kuntz <joel.kuntz.92@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^13.1.2",
+    "typescript": "^3.7.4"
+  }
+}
