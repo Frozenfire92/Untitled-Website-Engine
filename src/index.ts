@@ -3,8 +3,12 @@ const { readFile, writeFile, mkdir } = fsPromises;
 
 import { listFiles, rmDirRecursive } from './utils/files';
 
+const baseUrl = process.env['BASE_URL'] ?? '/';
+const baseUrlRegex = /###BASE_URL###/gm;
+
 async function main() {
   console.log('Untitled Website Engine\n');
+  console.log('baseUrl: ', baseUrl);
   // Clean/Create dist directory
   await rmDirRecursive('dist');
   await mkdir('dist');
@@ -72,12 +76,12 @@ async function compileViews(viewPath: string, partialPath: string, postsPath: st
       prefix,
       withoutPrefix,
       path: post,
-      url: `/${prefix}/${withoutPrefix.replace('.html', '')}`,
+      url: `${baseUrl}${prefix}/${withoutPrefix.replace('.html', '')}`,
       heading: heading && heading[1],
       name: heading
-        ?  `[${dateString.replace(/-/g, '/')}] ${heading[1]}`
+        ?  `${dateString.replace(/-/g, '/')} - ${heading[1]}`
         : withoutPrefix
-          .replace(dateString, `[${dateString.replace(/-/g, '/')}]`)
+          .replace(dateString, `${dateString.replace(/-/g, '/')}`)
           .replace('.html', '')
           .replace(/-/g, ' ')
           .trim(),
@@ -147,6 +151,10 @@ async function compileViews(viewPath: string, partialPath: string, postsPath: st
         _file = _file.replace('</title>', ` | ${post.heading || post.name}</title>`);
 
         let filePath = `${outPath}/${post.url}/index.html`
+
+        //Replace baseUrl
+        _file = _file.replace(baseUrlRegex, baseUrl);
+
         await writeFile(filePath, _file);
       }
     }
@@ -165,6 +173,10 @@ async function compileViews(viewPath: string, partialPath: string, postsPath: st
           `<ul>${matchingPosts.map(n => `<li><a href="${n.url}">${n.name}</a></li>`).join('')}</ul>`
         );
       }
+
+      //Replace baseUrl
+      _file = _file.replace(baseUrlRegex, baseUrl);
+
       await writeFile(`${outPath}${view.replace(/^views/, '')}`, _file);
     }
   }

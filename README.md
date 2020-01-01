@@ -12,6 +12,9 @@ A simple solution to writing your own blog or website that uses no external depe
 - You can change the structure of the html in `views/` and `partials/`
 - run the build script via `npm run build`
 
+## Environment Variables
+- `BASE_URL` (default `/`) use this if you aren't hosting this at the root directory. ex: `BASE_URL=/Untitled-Website-Engine/ npm run build`
+
 ## Directory Structure
 - `build/` - the output of the typescript compiler
 - `dist/` - the website output from running the built script. Host/share this
@@ -20,7 +23,7 @@ A simple solution to writing your own blog or website that uses no external depe
 - `views/` - the html route structure that will have content filled in
   - `views/*/index.html` - an end route the user will visit, often an index of posts
   - `views/*/_content.html` - if there are matching files in `posts/*/` they will use this template
-- `src/` - the source of the website engine
+- `src/` - the typescript source of the website engine
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
