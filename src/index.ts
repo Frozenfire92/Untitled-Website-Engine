@@ -98,7 +98,7 @@ async function compileViews(viewPath: string, partialPath: string, postsPath: st
       .map(n => n.replace(/^views\/?(.*?)\/([^/]*?)\.html$/, '$1'))
       .filter(n => n.length)
       .map(n => `${outPath}/${n}`),
-    ...posts.map(n => `${outPath}/${n.url.replace(/^\//, '')}`)
+    ...posts.map(n => `${outPath}/${n.url.replace(baseUrl, '/').replace(/^\//, '')}`)
   ];
   neededSubPaths = Array.from(new Set(neededSubPaths));
   
@@ -150,7 +150,7 @@ async function compileViews(viewPath: string, partialPath: string, postsPath: st
         // Replace title with post name
         _file = _file.replace('</title>', ` | ${post.heading || post.name}</title>`);
 
-        let filePath = `${outPath}/${post.url}/index.html`
+        let filePath = `${outPath}${post.url.replace(baseUrl, '/')}/index.html`
 
         //Replace baseUrl
         _file = _file.replace(baseUrlRegex, baseUrl);
