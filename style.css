@@ -66,6 +66,12 @@ header {
   margin-bottom: 2rem;
 }
 
+/* Nav active state */
+body.home nav a.home,
+body.blog nav a.blog {
+  text-decoration: underline;
+}
+
 nav > a {
   margin-right: 0.5rem;
 }
