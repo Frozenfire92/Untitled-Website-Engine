@@ -1,6 +1,6 @@
 import { promisify } from 'util'
 import { promises as fsPromises, exists as _exists } from 'fs';
-const { readdir, rmdir, lstat, unlink } = fsPromises;
+const { readdir, rmdir, lstat, unlink, mkdir, copyFile } = fsPromises;
 const exists = promisify(_exists);
 
 export async function listFiles(path: string): Promise<Array<string>> {
@@ -23,5 +23,19 @@ export async function rmDirRecursive(path: string) {
       else await unlink(curPath);
     }
     await rmdir(path);
+  }
+}
+
+export async function copyFolder(from: string, to: string) {
+  if (await exists(from)) {
+    if (!await exists(to)) {
+      await mkdir(to);
+    }
+    for (let entry of await readdir(from)) {
+      const curPath = `${from}/${entry}`;
+      const nextPath = `${to}/${entry}`;
+      if ((await lstat(curPath)).isDirectory()) await copyFolder(curPath, nextPath);
+      else await copyFile(curPath, nextPath);
+    }
   }
 }

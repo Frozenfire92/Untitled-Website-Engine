@@ -1,7 +1,7 @@
 import { promises as fsPromises } from 'fs';
 const { readFile, writeFile, mkdir } = fsPromises;
 
-import { listFiles, rmDirRecursive } from './utils/files';
+import { listFiles, rmDirRecursive, copyFolder } from './utils/files';
 
 const baseUrl = process.env['BASE_URL'] ?? '/';
 const baseUrlRegex = /###BASE_URL###/gm;
@@ -13,6 +13,7 @@ async function main() {
   await rmDirRecursive('dist');
   await mkdir('dist');
   // Compile the site
+  await copyFolder('public', 'dist');
   await compileCss('styles', 'dist/style.css');
   await compileViews('views', 'partials', 'posts', 'dist');
   // await compileRSS('dist');

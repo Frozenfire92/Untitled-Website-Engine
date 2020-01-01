@@ -12,6 +12,7 @@ Html + css are relatively easy to read by both humans and machines; it's been a 
 - `docs/` - you are here
 - `partials/` - common html that can be used as templates in the views
 - `posts/` - where you will write your posts. Directory structure should match `views/`
+- `public/` - store static assets like images here, they will be copied to `dist/`
 - `src/` - the typescript source of the website engine
 - `styles/` - the css source of your website. Ensure filenames are ordered as they are concatenated
 - `views/` - the html route structure that will have content filled in
