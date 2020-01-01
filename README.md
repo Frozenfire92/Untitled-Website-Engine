@@ -13,7 +13,7 @@ A simple solution to writing your own blog or website that uses no external depe
 - run the build script via `npm run build`
 
 ## Documentation
-Read a further details of this project and its usage in the [docs/](docs/README.md)
+Read further details of this project and its usage in the [docs/](docs/README.md)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
