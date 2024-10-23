@@ -28,6 +28,10 @@ async function compileCss(inPath: string, outPath: string) {
     let file = await readFile(entry, 'utf-8');
     finalText += `${file}\n`;
   }
+  
+  //Replace baseUrl
+  finalText = finalText.replace(baseUrlRegex, baseUrl);
+  
   await writeFile(outPath, finalText);
 }
 
